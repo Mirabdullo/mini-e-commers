@@ -1,6 +1,7 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { ApiOperation, ApiProperty, ApiResponse } from '@nestjs/swagger';
 import { CreateSubCategoriesDto } from './dto/create-sub-categories.dto';
+import { UpdateSubCategoriesDto } from './dto/update-sub-categories.dto';
 import { SubCategory } from './sub-categories.model';
 import { SubCategoriesService } from './sub-categories.service';
 
@@ -32,9 +33,19 @@ export class SubCategoriesController {
         return this.subCategoryService.getOneById(id)
     }
 
+    @ApiOperation({summary: "Yangilash"})
+    @ApiResponse({status: 200, type: SubCategory})
+    @Put(':id')
+    updateSubCategory(@Param('id') id: number, updateSubCategoryDto: UpdateSubCategoriesDto){
+        return this.subCategoryService.updateSubCategory(id, updateSubCategoryDto)
+    }
 
-
-
+    @ApiOperation({summary: "Ochirish"})
+    @ApiResponse({status: 200, type: SubCategory})
+    @Delete(":id")
+    deleteSubCategory(@Param('id') id: number){
+        return this.subCategoryService.deleteSubCategory(id)
+    }
 
 
 }
