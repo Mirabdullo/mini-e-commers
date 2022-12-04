@@ -1,12 +1,14 @@
-import { Module } from '@nestjs/common';
+import { forwardRef, Module } from '@nestjs/common';
 import { SequelizeModule } from '@nestjs/sequelize';
+import { SubCategory } from 'src/sub-categories/sub-categories.model';
 import { CategoriesController } from './categories.controller';
 import { Categories } from './categories.model';
 import { CategoriesService } from './categories.service';
 
 @Module({
   imports: [
-    SequelizeModule.forFeature([Categories])
+    SequelizeModule.forFeature([Categories]),
+    forwardRef(() => SubCategory)
   ],
   controllers: [CategoriesController],
   providers: [CategoriesService],
