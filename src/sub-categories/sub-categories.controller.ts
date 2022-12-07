@@ -20,7 +20,7 @@ export class SubCategoriesController {
 
     @ApiOperation({summary: "Barcha sub categoriyalar"})
     @ApiResponse({status: 200, type: [SubCategory]})
-    @Get()
+    @Get('all')
     getAll(){
         return this.subCategoryService.getAll()
     }

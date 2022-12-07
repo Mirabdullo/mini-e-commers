@@ -1,5 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { BelongsTo, Column, DataType, Model, Table } from "sequelize-typescript";
+import { BelongsTo, Column, DataType, HasMany, Model, Table } from "sequelize-typescript";
 import { SubCategory } from "src/sub-categories/sub-categories.model";
 
 interface CategoriesCreationAttrs {
@@ -25,6 +25,6 @@ export class Categories extends Model<Categories, CategoriesCreationAttrs> {
     })
     category_name: string
 
-    // @BelongsTo(() => SubCategory)
-    // subCategory: SubCategory[]
+    @HasMany(() => SubCategory)
+    subCategory: SubCategory[]
 }

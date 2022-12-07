@@ -32,6 +32,15 @@ export class SubCategoriesService {
     }
   }
 
+  async getOne(id: number){
+    try {
+      const subCategory = await this.subCategoryRepository.findAll({where: {category_id: id}, include: {all: true}})
+      return subCategory
+    } catch (error) {
+      throw new HttpException('Serverda xatolik', HttpStatus.FORBIDDEN)
+    }
+  }
+
   async getOneById(id: number) {
     try {
       const subCategory = await this.subCategoryRepository.findByPk(id, {
@@ -45,6 +54,14 @@ export class SubCategoriesService {
       throw new HttpException('Serverda xatolik!', HttpStatus.FORBIDDEN);
     }
   }
+  async getAllById(id: number){
+    try {
+      const subCategory = await this.subCategoryRepository.findAll({where: {category_id: id}, include:{all: true}})
+      return subCategory
+    } catch (error) {
+      throw new HttpException("Serverda xatolik", HttpStatus.FORBIDDEN)
+    }
+  }
 
   async updateSubCategory(
     id: number,
@@ -55,7 +72,7 @@ export class SubCategoriesService {
       if (!subCategory) {
         throw new HttpException("Ma'lumot topilmadi", HttpStatus.NOT_FOUND);
       }
-      const updateSubCategory = await this.subCategoryRepository.update(updateSubCategoryDto,{where: {id}, returning: true})
+      const updateSubCategory = await this.subCategoryRepository.update(updateSubCategoryDto,{where: {sub_category_id: id}, returning: true})
       return updateSubCategory
     } catch (error) {
       throw new HttpException('Serverda xatolik!', HttpStatus.FORBIDDEN);

@@ -14,7 +14,7 @@ export class CategoriesController {
   }
 
 
-  @Get()
+  @Get('all')
   getAll(){
     return this.categoriesService.getAll()
   }

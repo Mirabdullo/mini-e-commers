@@ -5,6 +5,8 @@ import { ProductsModule } from './products/products.module';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { ConfigModule } from '@nestjs/config';
 import { Categories } from './categories/categories.model';
+import { SubCategory } from './sub-categories/sub-categories.model';
+import { Products } from './products/products.model';
 
 @Module({
   imports: [ConfigModule.forRoot({
@@ -19,7 +21,7 @@ import { Categories } from './categories/categories.model';
       username: process.env.POSTGRES_USER,
       password: process.env.POSTGRES_PASSWORD,
       database: process.env.POSTGRES_DB,
-      models: [Categories],
+      models: [Categories, SubCategory,Products],
       autoLoadModels: true,
       logging: false
     }),
